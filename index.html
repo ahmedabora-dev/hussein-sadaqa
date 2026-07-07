@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>صدقة جارية — حسين أحمد بيومي</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Scheherazade+New:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #0d1117;
+    color: #e8dcc8;
+    font-family: 'Amiri', serif;
+    min-height: 100vh;
+    direction: rtl;
+  }
+
+  .container {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 1.2rem 4rem;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    padding: 3rem 0 2rem;
+  }
+
+  .bismillah {
+    font-family: 'Scheherazade New', serif;
+    font-size: 1.9rem;
+    color: #c9a84c;
+    margin-bottom: 1.8rem;
+    text-shadow: 0 0 30px rgba(201,168,76,0.4);
+  }
+
+  .photo-wrap {
+    width: 140px; height: 140px;
+    border-radius: 50%;
+    margin: 0 auto 1.4rem;
+    padding: 4px;
+    background: linear-gradient(135deg, #c9a84c, #e8c97a, #c9a84c);
+    box-shadow: 0 0 40px rgba(201,168,76,0.35);
+  }
+
+  .photo-wrap img {
+    width: 100%; height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: top;
+    display: block;
+  }
+
+  .photo-fallback {
+    width: 100%; height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1c2430, #2a3545);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 3.5rem;
+  }
+
+  .name {
+    font-family: 'Scheherazade New', serif;
+    font-size: 2rem; font-weight: 700;
+    color: #e8c97a; margin-bottom: 6px;
+  }
+
+  .rahimahu { font-size: 1.1rem; color: #a09070; margin-bottom: 1.5rem; }
+
+  .divider {
+    width: 200px; height: 1px;
+    background: linear-gradient(90deg, transparent, #c9a84c, transparent);
+    margin: 0 auto 1.5rem;
+  }
+
+  .intro { font-size: 1rem; color: #7a6a50; line-height: 1.9; }
+
+  /* Section title */
+  .sec-title {
+    text-align: center;
+    font-family: 'Scheherazade New', serif;
+    font-size: 1.4rem; color: #c9a84c;
+    margin: 2.2rem 0 1.2rem;
+  }
+
+  .sec-title::before { content: '✦'; font-size: .75rem; color: #e8c97a; margin-left: 8px; }
+  .sec-title::after  { content: '✦'; font-size: .75rem; color: #e8c97a; margin-right: 8px; }
+
+  /* Dua card */
+  .dua-card {
+    background: linear-gradient(135deg, #141a22, #12161e);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 16px;
+    padding: 1.8rem;
+    text-align: center;
+  }
+
+  .dua-text {
+    font-family: 'Scheherazade New', serif;
+    font-size: 1.3rem; color: #e8dcc8; line-height: 2.1;
+  }
+
+  /* Quran card */
+  .quran-card {
+    background: linear-gradient(135deg, #0d1a10, #0f1e14);
+    border: 1px solid rgba(76,175,125,0.25);
+    border-radius: 16px;
+    padding: 1.8rem; text-align: center;
+  }
+
+  .quran-verse {
+    font-family: 'Scheherazade New', serif;
+    font-size: 1.45rem; color: #e8dcc8; line-height: 2; margin-bottom: 8px;
+  }
+
+  .quran-ref { font-size: .9rem; color: #4caf7d; }
+
+  /* Dhikr cards */
+  .dhikr-grid { display: grid; gap: 1rem; }
+
+  .dhikr-card {
+    background: linear-gradient(135deg, #141a22, #1c2430);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 16px;
+    padding: 1.4rem;
+    cursor: pointer;
+    user-select: none;
+    transition: border-color .3s, transform .1s;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .dhikr-card:active { transform: scale(0.98); }
+  .dhikr-card.done { border-color: rgba(201,168,76,0.6); }
+
+  .dhikr-text {
+    font-family: 'Scheherazade New', serif;
+    font-size: 1.4rem; color: #e8dcc8; line-height: 1.7; margin-bottom: 4px;
+  }
+
+  .dhikr-meaning { font-size: .9rem; color: #a09070; margin-bottom: 1rem; }
+
+  .counter-row {
+    display: flex; align-items: center;
+    justify-content: space-between; gap: 8px;
+  }
+
+  .count-num {
+    font-family: 'Scheherazade New', serif;
+    font-size: 2rem; color: #e8c97a; font-weight: 700;
+    transition: transform .15s;
+  }
+
+  .count-num.pop { transform: scale(1.35); color: #c9a84c; }
+
+  .count-of { font-size: .8rem; color: #a09070; }
+
+  .btn-inc {
+    background: linear-gradient(135deg, #2e7d52, #4caf7d);
+    color: white; border: none;
+    border-radius: 50px;
+    padding: .55rem 1.3rem;
+    font-family: 'Amiri', serif;
+    font-size: 1rem; cursor: pointer;
+    box-shadow: 0 4px 12px rgba(46,125,82,0.3);
+  }
+
+  .badge {
+    background: linear-gradient(135deg, #c9a84c, #e8c97a);
+    color: #0d1117;
+    padding: .2rem .8rem;
+    border-radius: 20px;
+    font-size: .85rem; font-weight: 700;
+    display: none;
+  }
+
+  .badge.show { display: inline-block; }
+
+  .progress-bar {
+    width: 100%; height: 4px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 2px; margin-top: 12px; overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #2e7d52, #c9a84c);
+    border-radius: 2px;
+    transition: width .4s ease;
+  }
+
+  /* Total */
+  .total-card {
+    background: linear-gradient(135deg, #14100a, #1a140a);
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 16px;
+    padding: 1.5rem; margin-top: 2rem; text-align: center;
+  }
+
+  .total-label { font-size: .95rem; color: #a09070; margin-bottom: 6px; }
+
+  .total-num {
+    font-family: 'Scheherazade New', serif;
+    font-size: 3rem; color: #c9a84c; font-weight: 700;
+    text-shadow: 0 0 30px rgba(201,168,76,0.4);
+  }
+
+  .total-sub { font-size: .85rem; color: #6a7a5a; margin-top: 4px; }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 3rem 0 1rem;
+    color: #a09070; font-size: .95rem; line-height: 2;
+  }
+
+  .heart { color: #c9a84c; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="bismillah">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيم</div>
+
+    <div class="photo-wrap">
+      <img src="IMG_20260517_100005.jpg" alt="حسين أحمد بيومي"
+        onerror="this.style.display='none'; document.getElementById('fallback').style.display='flex'">
+      <div class="photo-fallback" id="fallback" style="display:none">🌙</div>
+    </div>
+
+    <div class="name">حسين أحمد بيومي</div>
+    <div class="rahimahu">رحمه الله وأسكنه فسيح جناته</div>
+    <div class="divider"></div>
+    <p class="intro">
+      هذه الصفحة صدقةٌ جارية على روح الفقيد<br>
+      كلُّ تسبيحةٍ وكل استغفار يُهدى إليه بإذن الله
+    </p>
+  </div>
+
+  <!-- Dua -->
+  <div class="sec-title">دعاء للميت</div>
+  <div class="dua-card">
+    <p class="dua-text">
+      اللهم اغفر له وارحمه، وعافه واعف عنه،<br>
+      وأكرم نزله، ووسع مدخله،<br>
+      واغسله بالماء والثلج والبرد،<br>
+      ونقه من الخطايا كما يُنقى الثوب الأبيض من الدنس
+    </p>
+  </div>
+
+  <!-- Quran -->
+  <div class="sec-title">آية كريمة</div>
+  <div class="quran-card">
+    <p class="quran-verse">﴿ كُلُّ نَفْسٍ ذَائِقَةُ الْمَوْتِ وَإِنَّمَا تُوَفَّوْنَ أُجُورَكُمْ يَوْمَ الْقِيَامَةِ ﴾</p>
+    <p class="quran-ref">سورة آل عمران - ١٨٥</p>
+  </div>
+
+  <!-- Dhikr -->
+  <div class="sec-title">الذكر والتسبيح</div>
+  <div class="dhikr-grid" id="grid"></div>
+
+  <!-- Total -->
+  <div class="total-card">
+    <div class="total-label">إجمالي الأذكار المُهداة إلى روحه</div>
+    <div class="total-num" id="totalNum">0</div>
+    <div class="total-sub">ذكر — اللهم بلِّغه ثوابها</div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <span class="heart">♡</span> أهدى هذه الأذكار إليك صديقٌ يحبك في الله <span class="heart">♡</span><br>
+    <span style="font-size:.85rem">اللهم أنزله منزلاً كريماً وأكرم نُزُله</span>
+  </div>
+
+</div>
+
+<script>
+const adhkar = [
+  { text: 'أَسْتَغْفِرُ اللهَ العَظِيمَ الَّذِي لَا إِلَهَ إِلَّا هُوَ الحَيُّ القَيُّومُ وَأَتُوبُ إِلَيْهِ', meaning: 'الاستغفار العظيم', target: 33, key: 'istighfar' },
+  { text: 'سُبْحَانَ اللهِ وَبِحَمْدِهِ سُبْحَانَ اللهِ العَظِيم', meaning: 'أحبُّ الكلام إلى الله', target: 33, key: 'tasbih' },
+  { text: 'لَا إِلَهَ إِلَّا اللهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ المُلْكُ وَلَهُ الحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِير', meaning: 'تعدل عتق عشرة أنفس', target: 33, key: 'tahlil' },
+  { text: 'اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَى نَبِيِّنَا مُحَمَّد', meaning: 'الصلاة على النبي ﷺ', target: 33, key: 'salawat' },
+  { text: 'سُبْحَانَ اللهِ، الحَمْدُ لِلَّهِ، اللهُ أَكْبَر', meaning: 'التسبيح والتحميد والتكبير', target: 33, key: 'tasbih3' },
+];
+
+let counts = {};
+let total = 0;
+
+try {
+  counts = JSON.parse(localStorage.getItem('h_counts') || '{}');
+  total = parseInt(localStorage.getItem('h_total') || '0');
+} catch(e) {}
+
+function save() {
+  try {
+    localStorage.setItem('h_counts', JSON.stringify(counts));
+    localStorage.setItem('h_total', String(total));
+  } catch(e) {}
+}
+
+function buildCards() {
+  const grid = document.getElementById('grid');
+  grid.innerHTML = '';
+  adhkar.forEach(d => {
+    const c = counts[d.key] || 0;
+    const pct = Math.min((c / d.target) * 100, 100);
+    const done = c >= d.target;
+
+    const card = document.createElement('div');
+    card.className = 'dhikr-card' + (done ? ' done' : '');
+    card.innerHTML = `
+      <p class="dhikr-text">${d.text}</p>
+      <p class="dhikr-meaning">${d.meaning}</p>
+      <div class="counter-row">
+        <div>
+          <div class="count-num" id="n-${d.key}">${c}</div>
+          <div class="count-of">من ${d.target}</div>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <span class="badge${done ? ' show' : ''}" id="b-${d.key}">✓ اكتمل</span>
+          <button class="btn-inc" id="btn-${d.key}">+ ذكر</button>
+        </div>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="p-${d.key}" style="width:${pct}%"></div></div>
+    `;
+
+    const inc = () => {
+      counts[d.key] = (counts[d.key] || 0) + 1;
+      total++;
+      const numEl = document.getElementById('n-' + d.key);
+      numEl.textContent = counts[d.key];
+      numEl.classList.add('pop');
+      setTimeout(() => numEl.classList.remove('pop'), 200);
+      const newPct = Math.min((counts[d.key] / d.target) * 100, 100);
+      document.getElementById('p-' + d.key).style.width = newPct + '%';
+      if (counts[d.key] >= d.target) {
+        document.getElementById('b-' + d.key).classList.add('show');
+        card.classList.add('done');
+      }
+      document.getElementById('totalNum').textContent = total;
+      save();
+    };
+
+    card.addEventListener('click', inc);
+    card.querySelector('.btn-inc').addEventListener('click', e => { e.stopPropagation(); inc(); });
+
+    grid.appendChild(card);
+  });
+
+  document.getElementById('totalNum').textContent = total;
+}
+
+buildCards();
+</script>
+</body>
+</html>
